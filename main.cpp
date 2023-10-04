@@ -15,19 +15,21 @@ int main() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_ANY_PROFILE);
 
+    window = glfwCreateWindow(640, 480, "First window!", NULL, NULL);
+
+    if (!window) {
+        glfwTerminate();
+        exit(EXIT_FAILURE);
+    }
+
+    glfwMakeContextCurrent(window);
+
 	if (!gladLoadGLES2Loader((GLADloadproc)glfwGetProcAddress)) {
 		std::cout << "Glad not loaded" << std::endl;
 		return -1;
 	}
 
-	window = glfwCreateWindow(640, 480, "First window!", NULL, NULL);
-
-	if (!window) {
-		glfwTerminate();
-		exit(EXIT_FAILURE);
-	}
-
-	glfwMakeContextCurrent(window);
+    std::cout << glGetString(GL_VERSION);
 	
 	while(!glfwWindowShouldClose(window)) {
 		glClear(GL_COLOR_BUFFER_BIT);
